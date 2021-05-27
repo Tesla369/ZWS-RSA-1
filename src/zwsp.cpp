@@ -117,10 +117,10 @@ long en[100];
 char command[256];
 char cmd[256];
 long p, q, n, phin, e, gcd;
-system("rm -rf secret.txt plain.txt");
+system("rm -rf secret.txt cover.txt");
 cout<<"ENCRYPTION => \n\n";
 
-cout<<"Enter the Secret/Plain Text to Encrypt: ";
+cout<<"Enter the Secret Text to Encrypt: ";
 cin.ignore();
 cin.getline(pt, 100);
 cout<<"\n\n";
@@ -132,11 +132,11 @@ cout<<"Enter the Public Key Component, e = ";
 cin>>e; //13
 
 char ct[100];
-cout<<"Enter the Cover Text: ";
+cout<<"\nEnter the Cover Text: ";
 cin.ignore();
 cin.getline(ct, 100);
 
-snprintf(cmd, 256, "echo -n '%s' >> plain.txt", ct);
+snprintf(cmd, 256, "echo -n '%s' >> cover.txt", ct);
 system(cmd);
 
 cout<<"\nConfiguring..."<<"\n\n";
@@ -151,16 +151,16 @@ gcd = __gcd(e,phin);
 cout<<"Large Prime Numbers:\n";
 cout<<"p = "<<p<<"\n";
 cout<<"q = "<<q<<"\n\n";
-//usleep(1000000);
+usleep(1000000);
 cout<<"n = p x q = "<<n<<"\n";
 cout<<"Φ(n) = (p - 1) x (q - 1) = "<<phin<<"\n";
 cout<<"Public Key Component (e): "<<e<<"\n";
 cout<<"gcd(e, Φ(n)) = "<<"gcd("<<e<<", "<<phin<<") = "<<gcd<<"\n\n";
-//usleep(1000000);
+usleep(1000000);
 cout<<"Verifying the following Conditions...\n";
 cout<<"1 < e < Φ(n)\n";
 cout<<"gcd(e, Φ(n)) = 1\n\n";
-//usleep(2000000);
+usleep(2000000);
 if(!((1<e && e<phin) && gcd==1))
 {
 int t;
@@ -210,7 +210,7 @@ system(command);
 //cout<<nv[i]<<" ";
 }
 
-system("python3 zw-stego.py -s secret.txt plain.txt");
+system("python3 zw-stego.py -s secret.txt cover.txt");
 cout<<"\n\n";
 cout<<"Good Bye!\n\n";
 }
@@ -223,12 +223,12 @@ long size, p, q, e, n, phin, gcd, k;
 double d;
 cout<<"DECRYPTION => \n\n";
 cout<<"👇 This is Decoded Cipher Text: \n";
-str = system("python3 zw-stego.py plain.txt");
+str = system("python3 zw-stego.py cover.txt");
 
 cout<<"\nEnter the length of the Cipher Text: ";
 cin>>size;
 cout<<"\n\n";
-str = system("python3 zw-stego.py plain.txt");
+str = system("python3 zw-stego.py cover.txt");
 
 cout<<"\nEnter This Cipher Text to Decrypt: ";
 for(int i=0; i<size; i++)
