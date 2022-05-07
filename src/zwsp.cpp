@@ -1,6 +1,7 @@
 #include <iostream>
 #include <ctype.h>
 #include <cstring>
+#include <cstdio>
 #include <string>
 #include <sstream>
 #include <algorithm>
@@ -208,9 +209,12 @@ system(command);
 //nv[i]=pow(nv[i], e);
 //nv[i]=nv[i]%n;
 //cout<<nv[i]<<" ";
+//system("cat cover.txt");
 }
 
 system("python3 zw-stego.py -s secret.txt cover.txt");
+cout<<"Cover Text:\n";
+system("cat cover.txt");
 cout<<"\n\n";
 cout<<"Good Bye!\n\n";
 }
@@ -320,6 +324,52 @@ cout<<"\n\n";
 
 }
 
+void diff()
+{
+
+string a, b;
+int la;
+int lb;
+int m=0;
+int n=0;
+cout<<"\nEnter original text: ";
+cin>>a;
+cout<<"\nEnter ZWSP cover text: ";
+cin>>b;
+la = a.length();
+lb = b.length();
+
+cout<<"\nLength of original Text: "<<la;
+cout<<"\nChars in Original Text: \n";
+while (m < la)
+{
+printf("%2x ", (unsigned char) a[m]);
+//printf("%c", a[m]);
+m++;
+}
+printf("\n");
+
+cout<<"\nLength of ZWSP Cover Text: "<<lb;
+cout<<"\nChars in ZWSP Cover Text: \n";
+while (n < lb)
+{
+printf("%2x ", (unsigned char) b[n]);
+//printf("%c", b[n]);
+n++;
+}
+printf("\n");
+
+if(la == lb)
+{
+cout<<"\nLength of both the text are same hence there is no difference";
+}
+else
+{
+cout<<"\nLength of both the text are different\n";
+}
+
+}
+
 void menu()
 {
 static int x=1;
@@ -329,13 +379,13 @@ x+=1;
 welcome();
 int val;
 char ch;
-cout<<"ZWS using RSA-1 Algorithm\n\n1. Encryption\n2. Decryption\n\n0. Exit\n\n\nChoose 1 to Encrypt, 2 to Decrypt and 0 to Exit: ";
+cout<<"ZWS using RSA-1 Algorithm\n\n1. Encryption\n2. Decryption\n3. Difference Checker\n\n0. Exit\n\n\nChoose 1 to Encrypt, 2 to Decrypt, 3 to check difference and 0 to Exit: ";
 cin>>val;
 if(val==1)
 {
 cout<<"\n";
 enc();
-cout<<"Enter c to continue to main menu: ";
+cout<<"\nEnter c to continue to main menu: ";
 cin>>ch;
 menu();
 }
@@ -343,7 +393,15 @@ else if(val==2)
 {
 cout<<"\n";
 dec();
-cout<<"Enter c to continue to main menu: ";
+cout<<"\nEnter c to continue to main menu: ";
+cin>>ch;
+menu();
+}
+else if(val==3)
+{
+cout<<"\n";
+diff();
+cout<<"\nEnter c to continue to main menu: ";
 cin>>ch;
 menu();
 }

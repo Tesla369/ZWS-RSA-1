@@ -2,7 +2,6 @@
 
 # Zero-width steganography
 # Idea: use two different kinds of zero-width (invisible) spaces to embed a hidden message in text
-# Hopefully after compression it will not have a much higher footprint in bytes
 
 import base64
 import click
